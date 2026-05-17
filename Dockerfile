@@ -19,7 +19,8 @@ FROM nginx:stable-alpine AS production
 # Supprimer la configuration par défaut de Nginx (évite les conflits)
 RUN rm -rf /etc/nginx/conf.d/default.conf
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf ----> used to test locally
+COPY nginx.ecs.conf /etc/nginx/conf.d/default.conf
 
 # Copier les fichiers construits depuis l'étape de build vers le dossier de Nginx
 COPY --from=builder /app/dist /usr/share/nginx/html
